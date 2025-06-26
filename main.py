@@ -193,8 +193,10 @@ def draw_init(surf):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                return True
             elif event.type == pygame.KEYUP:
                 waiting = False
+                return False
 
 
 class Rock(pygame.sprite.Sprite):
@@ -316,7 +318,9 @@ show_init = True
 running = True
 while running:
     if show_init:
-        draw_init(screen)
+        closed = draw_init(screen)
+        if closed:
+            break
         show_init = False
         
         all_sprites = pygame.sprite.Group()
